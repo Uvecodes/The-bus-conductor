@@ -1,0 +1,35 @@
+{
+  "name": "conductor-hire-services",
+  "version": "1.0.0",
+  "description": "Professional website for Conductor Hire Services - Nigerian transportation and hire service company",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "dev": "python -m http.server 8000",
+    "build": "echo 'No build process needed for static site'",
+    "deploy": "echo 'Deploy to your preferred hosting platform'"
+  },
+  "keywords": [
+    "transportation",
+    "hire-services",
+    "nigeria",
+    "vanilla-javascript",
+    "responsive-design",
+    "business-website"
+  ],
+  "author": "Conductor Hire Services",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/conductor-hire-services.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/conductor-hire-services/issues"
+  },
+  "homepage": "https://conductorhireservices.com",
+  "devDependencies": {},
+  "dependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  }
+} 
