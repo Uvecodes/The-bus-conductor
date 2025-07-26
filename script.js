@@ -1,5 +1,8 @@
 // DOM Content Loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize EmailJS - COMMENTED OUT
+    // emailjs.init("YOUR_PUBLIC_KEY"); // You'll need to replace this with your actual EmailJS public key
+    
     // Initialize all functionality
     initNavigation();
     initSmoothScrolling();
@@ -7,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initForms();
     initScrollAnimations();
     initModal();
+    initHeroVideo();
 });
 
 // Navigation functionality
@@ -110,14 +114,97 @@ function initForms() {
         });
     }
 
-    // Contact form
+    // Contact form - COMMENTED OUT
+    /*
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            handleContactForm(this);
+            
+            // Get form elements
+            const nameInput = this.querySelector('#contact-name');
+            const emailInput = this.querySelector('#contact-email');
+            const subjectInput = this.querySelector('#contact-subject');
+            const messageInput = this.querySelector('#contact-message');
+            
+            // Clear previous error states
+            [nameInput, emailInput, subjectInput, messageInput].forEach(input => {
+                input.classList.remove('error');
+                const errorDiv = input.parentNode.querySelector('.error-message');
+                if (errorDiv) errorDiv.remove();
+            });
+            
+            let hasErrors = false;
+            
+            // Validate name
+            if (!nameInput.value.trim()) {
+                showFieldError(nameInput, 'Name is required');
+                hasErrors = true;
+            }
+            
+            // Validate email
+            if (!emailInput.value.trim()) {
+                showFieldError(emailInput, 'Email is required');
+                hasErrors = true;
+            } else {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(emailInput.value.trim())) {
+                    showFieldError(emailInput, 'Please enter a valid email address');
+                    hasErrors = true;
+                }
+            }
+            
+            // Validate subject
+            if (!subjectInput.value.trim()) {
+                showFieldError(subjectInput, 'Subject is required');
+                hasErrors = true;
+            }
+            
+            // Validate message
+            if (!messageInput.value.trim()) {
+                showFieldError(messageInput, 'Message is required');
+                hasErrors = true;
+            }
+            
+            // If there are errors, don't submit
+            if (hasErrors) {
+                showModal('Please fix the errors in the form.', 'error');
+                return;
+            }
+
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            // Prepare email data
+            const templateParams = {
+                from_name: nameInput.value.trim(),
+                from_email: emailInput.value.trim(),
+                subject: subjectInput.value.trim(),
+                message: messageInput.value.trim(),
+                to_email: 'uvecodes@gmail.com'
+            };
+
+            // Send email using EmailJS
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    showModal('Your message has been sent successfully! We will get back to you within 24 hours.', 'success');
+                    contactForm.reset();
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    showModal('Sorry, there was an error sending your message. Please try again or contact us directly.', 'error');
+                })
+                .finally(function() {
+                    // Reset button state
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                });
         });
     }
+    */
 }
 
 // Handle booking form submission
@@ -209,6 +296,31 @@ function initModal() {
             modal.style.display = 'none';
         }
     });
+}
+
+// Show field error
+function showFieldError(field, message) {
+    field.classList.add('error');
+    field.style.borderColor = '#dc2626';
+    
+    // Remove existing error message
+    const existingError = field.parentNode.querySelector('.error-message');
+    if (existingError) {
+        existingError.remove();
+    }
+    
+    // Create and show error message
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'error-message';
+    errorDiv.textContent = message;
+    errorDiv.style.cssText = `
+        color: #dc2626;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+        display: block;
+    `;
+    
+    field.parentNode.appendChild(errorDiv);
 }
 
 // Show modal with custom message
@@ -421,6 +533,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 validateField(this);
             }
         });
+        
+        // Clear error on focus
+        input.addEventListener('focus', function() {
+            this.classList.remove('error');
+            this.style.borderColor = '';
+            const errorDiv = this.parentNode.querySelector('.error-message');
+            if (errorDiv) {
+                errorDiv.remove();
+            }
+        });
     });
 });
 
@@ -431,6 +553,7 @@ function validateField(field) {
     
     // Remove existing error styling
     field.classList.remove('error');
+    field.style.borderColor = '';
     
     // Check if required field is empty
     if (field.hasAttribute('required') && !value) {
@@ -469,6 +592,7 @@ function validateField(field) {
                 color: #dc2626;
                 font-size: 0.875rem;
                 margin-top: 0.25rem;
+                display: block;
             `;
             field.parentNode.appendChild(errorDiv);
         }
@@ -481,6 +605,71 @@ function validateField(field) {
         if (errorDiv) {
             errorDiv.remove();
         }
+    }
+}
+
+// Hero Video functionality
+function initHeroVideo() {
+    const video = document.querySelector('.hero-video');
+    const fallback = document.querySelector('.hero-fallback');
+    
+    console.log('Initializing hero video...');
+    console.log('Video element:', video);
+    console.log('Fallback element:', fallback);
+    
+    if (video && fallback) {
+        // Hide fallback initially
+        fallback.style.display = 'none';
+        
+        // Check if video can play
+        video.addEventListener('canplay', function() {
+            console.log('✅ Video can play successfully');
+            fallback.style.display = 'none';
+        });
+        
+        // Show fallback if video fails to load
+        video.addEventListener('error', function(e) {
+            console.log('❌ Video failed to load:', e);
+            console.log('Video error details:', video.error);
+            fallback.style.display = 'block';
+            video.style.display = 'none';
+        });
+        
+        // Log video loading progress
+        video.addEventListener('loadstart', function() {
+            console.log('🔄 Video loading started');
+        });
+        
+        video.addEventListener('loadeddata', function() {
+            console.log('📊 Video data loaded');
+        });
+        
+        video.addEventListener('canplaythrough', function() {
+            console.log('🎬 Video can play through');
+        });
+        
+        // Show fallback if video doesn't start playing within 5 seconds
+        setTimeout(function() {
+            if (video.paused || video.readyState < 2) {
+                console.log('⏰ Video not playing after 5 seconds, showing fallback');
+                console.log('Video paused:', video.paused);
+                console.log('Video ready state:', video.readyState);
+                fallback.style.display = 'block';
+                video.style.display = 'none';
+            }
+        }, 5000);
+        
+        // Try to play the video
+        console.log('🎥 Attempting to play video...');
+        video.play().then(function() {
+            console.log('✅ Video autoplay successful');
+        }).catch(function(error) {
+            console.log('❌ Video autoplay failed:', error);
+            fallback.style.display = 'block';
+            video.style.display = 'none';
+        });
+    } else {
+        console.log('❌ Video or fallback elements not found');
     }
 }
 
@@ -501,3 +690,4 @@ errorStyles.textContent = `
     }
 `;
 document.head.appendChild(errorStyles); 
+

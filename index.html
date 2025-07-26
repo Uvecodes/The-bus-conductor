@@ -28,7 +28,20 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero" id="hero" style="background: linear-gradient(rgba(30,64,175,0.85), rgba(30,64,175,0.85)), url('./assets/Eko\ Bridge.jpeg') center/cover no-repeat; position: relative; overflow: hidden;">
+    <section class="hero" id="hero">
+        <!-- Background Video -->
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="./assets/hero-video (1).mp4" type="video/mp4">
+            <!-- Fallback message if video doesn't load -->
+            Your browser does not support the video tag.
+        </video>
+        
+        <!-- Fallback background image if video doesn't load -->
+        <div class="hero-fallback" style="background: linear-gradient(rgba(30,64,175,0.85), rgba(30,64,175,0.85)), url('./assets/Eko\ Bridge.jpeg') center/cover no-repeat;"></div>
+        
+        <!-- Video Overlay -->
+        <div class="hero-overlay"></div>
+        
         <div class="hero-content">
             <img src="./assets/hero-profile-pic.jpg" alt="Bus Conductor" style="width: 160px; aspect-ratio: 1/1; object-fit: cover; border-radius: 50%; border: 5px solid #fff; margin-bottom: 1.5rem; box-shadow: 0 4px 24px rgba(30,64,175,0.2);">
             <h1 class="hero-title">Meet The Bus Conductor</h1>
@@ -44,8 +57,8 @@
     <section class="about" id="about">
         <div class="container about-content">
             <div class="about-text">
-                <h3>About John Doe</h3>
-                <p>John Doe has been a dedicated bus conductor for over 10 years, known for his punctuality, honesty, and friendly demeanor. He takes pride in making every passenger feel welcome and safe, and is always ready to assist with a helping hand or a kind word.</p>
+                <h3>About The Bus Conductor</h3>
+                <p>Wisdom Erivwode, popularly known as bus conductor is from Ughelli north of Delta state, Nigeria. He is the founder of The bus conductor express limited. He is a spontaneous comedian and also known for his comic moments in the bus, driven by passion and faith.</p>
                 <!-- <h3>Why Choose John?</h3>
                 <ul class="features-grid">
                     <li class="feature">
@@ -152,21 +165,21 @@
     <footer class="footer">
         <div class="container footer-content">
             <div class="footer-section">
-                <h3>About John</h3>
-                <p>John Doe is dedicated to making every bus journey safe, comfortable, and enjoyable for all passengers.</p>
+                <h3>About The Bus Conductor</h3>
+                <p>Wisdom Erivwode, popularly known as bus conductor is from Ughelli north of Delta state, Nigeria. He is the founder of The bus conductor express limited. He is a spontaneous comedian and also known for his comic moments in the bus, driven by passion and faith.</p>
             </div>
             <div class="footer-section">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#nav-menu">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="mailto:conductorhireservices@gmail.com">Contact</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            &copy; 2024 John Doe. All rights reserved.
+            &copy; 2025 The Bus Conductor. All rights reserved.
         </div>
     </footer>
 
