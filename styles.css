@@ -1185,6 +1185,7 @@ body {
     .nav-container {
         padding: 0 10px;
         height: 60px;
+        
     }
     
     .nav-logo h2 {
@@ -1231,6 +1232,7 @@ body {
     .hero-buttons {
         gap: 0.5rem;
         width: 100%;
+          border: red 1px solid ;          /*remember to delete this testing line*/
     }
 
     .btn {
@@ -1411,6 +1413,7 @@ body {
     .hero-buttons {
         gap: 0.5rem;
         width: 100%;
+      
     }
 
     .btn {
